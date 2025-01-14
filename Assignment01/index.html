@@ -29,6 +29,7 @@
 			font-size: 14px;
 		}
 	</style>
+	<link rel="stylesheet" href="./css/modal.css">
 	<link rel="stylesheet" href="./style.css">
 </head>
 
@@ -83,25 +84,24 @@
 							<div class="form-group row mb-3">
 								<label for="input-id" class="col-sm-3 col-form-label">Pet ID</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" id="input-id" placeholder="Input ID">
+									<input type="text" class="form-control" id="input-id" name="input-id" placeholder="Input ID">
 								</div>
 							</div>
 							<div class="form-group row mb-3">
 								<label for="input-name" class="col-sm-3 col-form-label">Pet Name</label>
 								<div class="col-sm-5">
-									<input type="text" class="form-control" id="input-name" placeholder="Input Name">
+									<input type="text" class="form-control" id="input-name" name="input-name" placeholder="Input Name">
 								</div>
-								<label for="input-age" class="col-sm-1 col-form-label"
-									style="text-align:right">Age</label>
+								<label for="input-age" class="col-sm-1 col-form-label" style="text-align:right">Age</label>
 								<div class="col-sm-3">
-									<input type="number" class="form-control" id="input-age" min="1"
+									<input type="number" class="form-control" id="input-age" name="input-age" min="1"
 										placeholder="Input Age">
 								</div>
 							</div>
 							<div class="form-group row mb-3">
 								<label for="input-type" class="col-sm-3 col-form-label">Type</label>
 								<div class="col-sm-9">
-									<select class="form-control" id="input-type" required>
+									<select class="form-control" id="input-type" name="input-type" required>
 										<option value="placeHolder">Select Type</option>
 										<option value="dog">Dog</option>
 										<option value="cat">Cat</option>
@@ -111,26 +111,24 @@
 							<div class="form-group row mb-3">
 								<label for="input-weight" class="col-sm-3 col-form-label">Weight</label>
 								<div class="col-sm-3">
-									<input type="number" class="form-control" id="input-weight" max="15" min="1"
+									<input type="number" class="form-control" id="input-weight" name="input-weight" max="15" min="1"
 										placeholder="Input Weight">
 								</div>
 
-								<label for="input-length" class="col-sm-3 col-form-label"
-									style="text-align:right">Length</label>
+								<label for="input-length" class="col-sm-3 col-form-label" style="text-align:right">Length</label>
 								<div class="col-sm-3">
-									<input type="number" class="form-control" id="input-length" max="100" min="1"
+									<input type="number" class="form-control" id="input-length" name="input-length" max="100" min="1"
 										placeholder="Input Length">
 								</div>
 							</div>
 							<div class="form-group row mb-3">
 								<label class="col-sm-3 col-form-label">Color</label>
 								<div class="col-sm-3">
-									<input type="color" class="form-control" id="input-color-1">
+									<input type="color" class="form-control" id="input-color-1" name="input-color-1" value="#000000">
 								</div>
-								<label for="input-breed" class="col-sm-3 col-form-label"
-									style="text-align:right">Breed</label>
+								<label for="input-breed" class="col-sm-3 col-form-label" style="text-align:right">Breed</label>
 								<div class="col-sm-3">
-									<select class="form-control" id="input-breed">
+									<select class="form-control" id="input-breed" name="input-breed">
 										<option>Select Breed</option>
 										<option>Tabby</option>
 										<option>Domestic Medium Hair</option>
@@ -146,15 +144,15 @@
 							<div class="form-group row mb-3">
 								<div class="col-sm-3"></div>
 								<div class="custom-control custom-checkbox col-sm-3">
-									<input type="checkbox" class="custom-control-input" id="input-vaccinated">
+									<input type="checkbox" class="custom-control-input" id="input-vaccinated" name="input-vaccinated">
 									<label class="custom-control-label" for="input-vaccinated">Vaccinated</label>
 								</div>
 								<div class="custom-control custom-checkbox col-sm-3">
-									<input type="checkbox" class="custom-control-input" id="input-dewormed">
+									<input type="checkbox" class="custom-control-input" id="input-dewormed" name="input-dewormed">
 									<label class="custom-control-label" for="input-dewormed">Dewormed</label>
 								</div>
 								<div class="custom-control custom-checkbox col-sm-3">
-									<input type="checkbox" class="custom-control-input" id="input-sterilized">
+									<input type="checkbox" class="custom-control-input" id="input-sterilized" name="input-sterilized">
 									<label class="custom-control-label" for="input-sterilized">Sterilized</label>
 								</div>
 							</div>
@@ -164,8 +162,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="container" style="max-width: 90%">
-				<table class="table table-striped">
+			<div class="container" style="max-width: 90%; max-height: 90vh; overflow: auto;">
+				<table class="table table-striped mt-4">
 					<thead>
 						<tr>
 							<th scope="col">ID</th>
@@ -199,6 +197,7 @@
 							<td><i class="bi bi-check-circle-fill"></i></td>
 							<td><i class="bi bi-check-circle-fill"></i></td>
 							<td><i class="bi bi-check-circle-fill"></i></td>
+							<td>60</td>
 							<td>01/03/2022</td>
 							<td><button type="button" class="btn btn-danger">Delete</button>
 							</td>
@@ -217,6 +216,7 @@
 							<td><i class="bi bi-x-circle-fill"></i></td>
 							<td><i class="bi bi-x-circle-fill"></i></td>
 							<td><i class="bi bi-x-circle-fill"></i></td>
+							<td>60</td>
 							<td>02/03/2022</td>
 							<td><button type="button" class="btn btn-danger">Delete</button>
 							</td>
@@ -225,6 +225,19 @@
 				</table>
 			</div>
 		</div>
+
+		<!-- Modal -->
+		<div id="formFileSave-modal" class="modal hidden">
+			<form id="form-file-save">
+				<button id="close-modal" class="close-modal">&times;</button>
+				<h1>Save File</h1>
+				<p>Enter your file name</p>
+				<input type="text" name="file-name" id="file-name" class="form-control mb-4" placeholder="Enter file name">
+				<button type="button" class="btn btn-primary" id="save-btn">Save</button>
+				<button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
+			</form>
+		</div>
+		<div class="overlay hidden"></div>
 	</div>
 
 	<!-- JavaScript Bundle with Popper -->
@@ -239,7 +252,9 @@
 			sidebarEl.classList.toggle('active');
 		});
 	</script>
-	<script src="./script.js"></script>
+	<script src="./js/modal.js"></script>
+	<script src="./node_modules/file-saver/dist/FileSaver.js"></script>
+	<script type="module" src="./index.js"></script>
 </body>
 
 </html>
