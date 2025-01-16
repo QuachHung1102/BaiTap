@@ -35,7 +35,26 @@ const qrSelector = (selector) => {
 
 // DOM
 const tableBodyEl = getEleById(`tbody`);
+const findIdEl = getEleById(`find-id-btn`);
 
 // Event
+
+if (findIdEl) {
+  findIdEl.addEventListener('click', (e) => {
+    e.preventDefault();
+    const form = getEleById('findID-form');
+    const formData = new FormData(form);
+    const petId = formData.get('input-id');
+    if (petList.hasOwnProperty(petId)) {
+      const petFind = [petList[petId]];
+      renderTableData(petFind);
+    } else {
+      window.alert(`Can't find petId: ${petId}`);
+    }
+  });
+}
+
+
 tableBodyEl.innerHTML = ``;
-renderTableData(petList);
+renderTableData({});
+

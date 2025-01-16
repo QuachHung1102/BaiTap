@@ -46,6 +46,36 @@ const petList = {
   // },
 };
 
+// checkData để validate 
+export const checkData = (data) => {
+  console.log(data); // In ra dữ liệu nhập vào( là data chưa qua xủ lý)
+  let flag = Object.values(data).every(value => {
+    if (typeof (value) === 'boolean') {
+      return true;
+    }
+    return value !== null && value !== undefined && value !== '';
+  });
+
+  if (flag) {
+    if (checkId(data.id) == false) {
+      flag = false;
+      alert(`ID must be unique!`);
+    } else if (data.age < 1 || data.age > 15) {
+      flag = false;
+      alert(`Age must be between 1 and 15!`);
+    } else if (data.type == ``) {
+      flag = false;
+      alert(`Please select Type!`);
+    } else if (data.breed == ``) {
+      flag = false;
+      alert(`Please select Breed!`);
+    }
+  } else {
+    alert(`Hãy nhập đầy đủ các trường dữ liệu!`);
+  }
+  return flag;
+}
+
 if (typeof (Storage) !== "undefined") {
   // Code for localStorage/sessionStorage.
   const data = localStorage.getItem('petList');

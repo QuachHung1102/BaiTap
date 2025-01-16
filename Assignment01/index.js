@@ -4,6 +4,7 @@ import {
   renderTableData,
   renderTableDataHealthyPet
 } from './js/utils.js';
+import { checkData } from './js/data.js';
 import { saveDynamicDataToFile } from './js/saveFile.js';
 import { petList } from './js/data.js';
 
@@ -28,36 +29,6 @@ const checkId = (id) => {
     const arrPetList = Object.values(petList);
     flag = !arrPetList.some((pet) => pet.id == id);
     console.log(flag);
-  }
-  return flag;
-}
-
-// checkData để validate
-const checkData = (data) => {
-  console.log(data); // In ra dữ liệu nhập vào( là data chưa qua xủ lý)
-  let flag = Object.values(data).every(value => {
-    if (typeof (value) === 'boolean') {
-      return true;
-    }
-    return value !== null && value !== undefined && value !== '';
-  });
-
-  if (flag) {
-    if (checkId(data.id) == false) {
-      flag = false;
-      alert(`ID must be unique!`);
-    } else if (data.age < 1 || data.age > 15) {
-      flag = false;
-      alert(`Age must be between 1 and 15!`);
-    } else if (data.type == ``) {
-      flag = false;
-      alert(`Please select Type!`);
-    } else if (data.breed == ``) {
-      flag = false;
-      alert(`Please select Breed!`);
-    }
-  } else {
-    alert(`Hãy nhập đầy đủ các trường dữ liệu!`);
   }
   return flag;
 }

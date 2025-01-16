@@ -216,6 +216,10 @@ a.article:hover {
     border-radius: 3px;
 }
 
+td {
+    vertical-align: middle;
+}
+
 
 
 /* ---------------------------------------------------

@@ -34,6 +34,7 @@ const createCell = (content) => {
 
 const createIconCell = (iconClass) => {
   const cell = document.createElement('td');
+  cell.style.textAlign = 'center';
   const icon = document.createElement('i');
   icon.className = `bi bi-${iconClass}-circle-fill`;
   cell.appendChild(icon);
@@ -42,6 +43,7 @@ const createIconCell = (iconClass) => {
 
 const createColorCell = (color) => {
   const colorCell = document.createElement('td');
+  colorCell.style.textAlign = 'center';
   const colorIcon = document.createElement('i');
   colorIcon.className = `bi bi-square-fill`;
   colorIcon.style.color = color;
@@ -138,8 +140,8 @@ const createFragmentContent = (pet) => {
 //     tableBodyEl.innerHTML = htmlStudent;
 // }
 
-const renderTableData = () => {
-  const petArr = Object.values(petList);
+const renderTableData = (petarr) => {
+  const petArr = Object.values(petarr);
   const fragment = document.createDocumentFragment(); // Tạo 1 fragment để chứa các thẻ tr
   petArr.forEach((pet) => {
     const row = createFragmentContent(pet);
@@ -187,8 +189,8 @@ const renderTableData = () => {
 //   tableBodyEl.innerHTML = htmlStudent;
 // }
 
-const renderTableDataHealthyPet = () => {
-  const petArr = Object.values(petList);
+const renderTableDataHealthyPet = (petarr) => {
+  const petArr = Object.values(petarr);
   const fragment = document.createDocumentFragment(); // Tạo 1 fragment để chứa các thẻ tr
 
   petArr.forEach((pet) => {
@@ -212,11 +214,10 @@ const deletePet = (petId) => {
 
 const editPet = (petId, dataEdited) => {
   if (petList.hasOwnProperty(petId)) {
+
     // delete petList[petId];
-
-
     // localStorage.setItem('petList', JSON.stringify(petList));
-    renderTableData();
+    // renderTableData(petList);
   }
 }
 
