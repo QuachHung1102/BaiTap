@@ -2,10 +2,10 @@
 import {
   getCreateDate,
   renderTableData,
-  renderTableDataHealthyPet
+  renderTableDataHealthyPet,
+  renderBreeds
 } from './js/utils.js';
 import { checkData } from './js/data.js';
-import { saveDynamicDataToFile } from './js/saveFile.js';
 import { petList } from './js/data.js';
 
 let showHealthyActive = false;
@@ -22,26 +22,29 @@ const qrSelector = (selector) => {
   return document.querySelector(selector);
 }
 
-const checkId = (id) => {
-  let flag = true;
-  console.log(`id: ${id}`);
-  if (Object.keys(petList).length > 0) {
-    const arrPetList = Object.values(petList);
-    flag = !arrPetList.some((pet) => pet.id == id);
-    console.log(flag);
-  }
-  return flag;
-}
-
 // DOM
 
+const addForm = getEleById('form');
 const submitEle = getEleById(`submit-btn`);
 const healthyEl = getEleById(`healthy-btn`);
 const tableBodyEl = getEleById(`tbody`);
+const breedTypeSeclectEl = getEleById(`input-type`);
+
 // Even
 
+breedTypeSeclectEl.addEventListener('change', (e) => {
+  renderBreeds(e.target.value);
+});
+
+addForm.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault(); // Ngăn chặn hành vi mặc định của form
+    submitEle.click(); // Kích hoạt sự kiện click của nút submit
+  }
+});
+
 submitEle.addEventListener('click', (e) => {
-  e.preventDefault();   // Ngăn chặn các hành vi mặc định của form
+  e.preventDefault();
   const form = getEleById('form');
   const formData = new FormData(form);
 
@@ -49,7 +52,7 @@ submitEle.addEventListener('click', (e) => {
     id: formData.get('input-id'),
     name: formData.get('input-name'),
     age: parseInt(formData.get('input-age')),
-    type: formData.get('input-type'),
+    type: formData.get('input-type').at(0).toUpperCase() + formData.get('input-type').substring(1),
     weight: formData.get('input-weight'),
     length: formData.get('input-length'),
     color: formData.get('input-color-1'),
@@ -91,13 +94,6 @@ if (healthyEl) {
 tableBodyEl.innerHTML = ``;
 renderTableData(petList);
 // renderTableDataHealthyPet(petList);
-
-export {
-  submitEle,
-  healthyEl,
-  tableBodyEl,
-  petList
-};
 
 // (function (a) {
 //     return (function () {

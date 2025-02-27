@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Pet App</title>
-
+	<link rel="icon" href="/images/icons8-pet-96.png" type="image/png">
 	<!-- CSS only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -33,6 +33,7 @@
 			display: none;
 		}
 	</style>
+	<link rel="stylesheet" href="../css/modal.css">
 	<link rel="stylesheet" href="../style.css">
 </head>
 
@@ -70,6 +71,12 @@
 						Breed
 					</a>
 				</li>
+				<li class="">
+					<a href="./data.html">
+						<i class="bi bi-clipboard-data"></i>
+						Data
+					</a>
+				</li>
 			</ul>
 		</nav>
 
@@ -87,79 +94,12 @@
 							<div class="form-group row mb-3">
 								<label for="input-id" class="col-sm-3 col-form-label">Pet ID</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" id="input-id" name="input-id" placeholder="Input Pet ID"
+									<input type="text" class="form-control" id="input-id" name="input-id" placeholder="Input pet ID" 
 										required>
 								</div>
 							</div>
-							<button type="button" class="btn btn-primary" id="find-id-btn">Submit</button>
+							<button type="button" class="btn btn-primary" id="find-id-btn">Find Pet</button>
 						</form>
-						<!-- <form>
-							<div class="form-group row mb-3">
-								<label for="input-id" class="col-sm-3 col-form-label">Pet ID</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control" id="input-id" placeholder="Input ID" disabled>
-								</div>
-							</div>
-							<div class="form-group row mb-3">
-								<label for="input-name" class="col-sm-3 col-form-label">Pet Name</label>
-								<div class="col-sm-5">
-									<input type="text" class="form-control" id="input-name" placeholder="Input Name">
-								</div>
-								<label for="input-age" class="col-sm-1 col-form-label" style="text-align:right">Age</label>
-								<div class="col-sm-3">
-									<input type="number" class="form-control" id="input-age" placeholder="Input Age">
-								</div>
-							</div>
-							<div class="form-group row mb-3">
-								<label for="input-type" class="col-sm-3 col-form-label">Type</label>
-								<div class="col-sm-9">
-									<select class="form-control" id="input-type">
-										<option>Select Type</option>
-										<option>Dog</option>
-										<option>Cat</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group row mb-3">
-								<label for="input-weight" class="col-sm-3 col-form-label">Weight</label>
-								<div class="col-sm-3">
-									<input type="number" class="form-control" id="input-weight" placeholder="Input Weight">
-								</div>
-
-								<label for="input-length" class="col-sm-3 col-form-label" style="text-align:right">Length</label>
-								<div class="col-sm-3">
-									<input type="number" class="form-control" id="input-length" placeholder="Input Length">
-								</div>
-							</div>
-							<div class="form-group row mb-3">
-								<label class="col-sm-3 col-form-label">Color</label>
-								<div class="col-sm-3">
-									<input type="color" class="form-control" id="input-color-1">
-								</div>
-								<label for="input-breed" class="col-sm-3 col-form-label" style="text-align:right">Breed</label>
-								<div class="col-sm-3">
-									<select class="form-control" id="input-breed">
-										<option>Select Breed</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group row mb-3">
-								<div class="col-sm-3"></div>
-								<div class="custom-control custom-checkbox col-sm-3">
-									<input type="checkbox" class="custom-control-input" id="input-vaccinated">
-									<label class="custom-control-label" for="input-vaccinated">Vaccinated</label>
-								</div>
-								<div class="custom-control custom-checkbox col-sm-3">
-									<input type="checkbox" class="custom-control-input" id="input-dewormed">
-									<label class="custom-control-label" for="input-dewormed">Dewormed</label>
-								</div>
-								<div class="custom-control custom-checkbox col-sm-3">
-									<input type="checkbox" class="custom-control-input" id="input-sterilized">
-									<label class="custom-control-label" for="input-sterilized">Sterilized</label>
-								</div>
-							</div>
-							<button type="button" class="btn btn-primary" id="submit-btn">Submit</button>
-						</form> -->
 					</div>
 				</div>
 			</div>
@@ -190,74 +130,85 @@
 		</div>
 	</div>
 	<!-- Modal -->
-	<div id="formFileSave-modal" class="modal ">
-		<form>
-			<button id="close-modal" class="close-modal">&times;</button>
+	<div id="formEdit-modal" class="modal hidden">
+		<form id="form-edit">
+			<h1 class="mb-2">Edit pet</h1>
+			<button id="close-modal" class="close-modal" type="button">&times;</button>
 			<div class="form-group row mb-3">
-				<label for="input-id" class="col-sm-3 col-form-label">Pet ID</label>
+				<label for="input-id-edit" class="col-sm-3 col-form-label">Pet ID</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" id="input-id" placeholder="Input ID" disabled>
+					<input type="text" class="form-control" id="input-id-edit" name="input-id-edit" placeholder="Input ID"
+						readonly>
 				</div>
 			</div>
 			<div class="form-group row mb-3">
-				<label for="input-name" class="col-sm-3 col-form-label">Pet Name</label>
+				<label for="input-name-edit" class="col-sm-3 col-form-label">Pet Name</label>
 				<div class="col-sm-5">
-					<input type="text" class="form-control" id="input-name" placeholder="Input Name">
+					<input type="text" class="form-control" id="input-name-edit" name="input-name-edit" placeholder="Input Name">
 				</div>
-				<label for="input-age" class="col-sm-1 col-form-label" style="text-align:right">Age</label>
+				<label for="input-age-edit" class="col-sm-1 col-form-label" style="text-align:right">Age</label>
 				<div class="col-sm-3">
-					<input type="number" class="form-control" id="input-age" placeholder="Input Age">
+					<input type="number" class="form-control" id="input-age-edit" name="input-age-edit" placeholder="Input Age">
 				</div>
 			</div>
 			<div class="form-group row mb-3">
-				<label for="input-type" class="col-sm-3 col-form-label">Type</label>
+				<label for="input-type-edit" class="col-sm-3 col-form-label">Type</label>
 				<div class="col-sm-9">
-					<select class="form-control" id="input-type">
-						<option>Select Type</option>
-						<option>Dog</option>
-						<option>Cat</option>
+					<select class="form-control" id="input-type-edit" name="input-type-edit">
+						<option value="placeHolder">Select Type</option>
+						<option value="dog">Dog</option>
+						<option value="cat">Cat</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group row mb-3">
-				<label for="input-weight" class="col-sm-3 col-form-label">Weight</label>
+				<label for="input-weight-edit" class="col-sm-3 col-form-label">Weight</label>
 				<div class="col-sm-3">
-					<input type="number" class="form-control" id="input-weight" placeholder="Input Weight">
+					<input type="number" class="form-control" id="input-weight-edit" name="input-weight-edit"
+						placeholder="Input Weight">
 				</div>
-
-				<label for="input-length" class="col-sm-3 col-form-label" style="text-align:right">Length</label>
+				<label for="input-length-edit" class="col-sm-3 col-form-label" style="text-align:right">Length</label>
 				<div class="col-sm-3">
-					<input type="number" class="form-control" id="input-length" placeholder="Input Length">
+					<input type="number" class="form-control" id="input-length-edit" name="input-length-edit"
+						placeholder="Input Length">
 				</div>
 			</div>
 			<div class="form-group row mb-3">
-				<label class="col-sm-3 col-form-label">Color</label>
+				<label class="col-sm-3 col-form-label" for="input-color-1-edit">Color</label>
 				<div class="col-sm-3">
-					<input type="color" class="form-control" id="input-color-1">
+					<input type="color" class="form-control" id="input-color-1-edit" name="input-color-1-edit">
 				</div>
-				<label for="input-breed" class="col-sm-3 col-form-label" style="text-align:right">Breed</label>
+				<label for="input-breed-edit" class="col-sm-3 col-form-label" style="text-align:right">Breed</label>
 				<div class="col-sm-3">
-					<select class="form-control" id="input-breed">
+					<select class="form-control" id="input-breed-edit" name="input-breed-edit">
 						<option>Select Breed</option>
+						<option>Tabby</option>
+						<option>Domestic Medium Hair</option>
+						<option>Mixed Breed</option>
+						<option>Domestic Short Hair</option>
+						<option>Terrier</option>
+						<option>Greyhound</option>
+						<option>Persian</option>
+						<option>Rottweiler</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group row mb-3">
 				<div class="col-sm-3"></div>
 				<div class="custom-control custom-checkbox col-sm-3">
-					<input type="checkbox" class="custom-control-input" id="input-vaccinated">
-					<label class="custom-control-label" for="input-vaccinated">Vaccinated</label>
+					<input type="checkbox" class="custom-control-input" id="input-vaccinated-edit" name="input-vaccinated-edit">
+					<label class="custom-control-label" for="input-vaccinated-edit">Vaccinated</label>
 				</div>
 				<div class="custom-control custom-checkbox col-sm-3">
-					<input type="checkbox" class="custom-control-input" id="input-dewormed">
-					<label class="custom-control-label" for="input-dewormed">Dewormed</label>
+					<input type="checkbox" class="custom-control-input" id="input-dewormed-edit" name="input-dewormed-edit">
+					<label class="custom-control-label" for="input-dewormed-edit">Dewormed</label>
 				</div>
 				<div class="custom-control custom-checkbox col-sm-3">
-					<input type="checkbox" class="custom-control-input" id="input-sterilized">
-					<label class="custom-control-label" for="input-sterilized">Sterilized</label>
+					<input type="checkbox" class="custom-control-input" id="input-sterilized-edit" name="input-sterilized-edit">
+					<label class="custom-control-label" for="input-sterilized-edit">Sterilized</label>
 				</div>
 			</div>
-			<button type="button" class="btn btn-primary" id="submit-btn">Submit</button>
+			<button type="button" class="btn btn-primary" id="button-btn-edit">Edit pet</button>
 		</form>
 	</div>
 	<div class="overlay hidden"></div>
@@ -275,7 +226,7 @@
 		});
 	</script>
 
-	<script src="./js/modal.js"></script>
+	<script src="../js/modal.js"></script>
 	<script type="module" src="../js/edit.js"></script>
 </body>
 

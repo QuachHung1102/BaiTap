@@ -1,5 +1,5 @@
 'use strict';
-import { petList } from './data.js';
+import { breedList, petList } from './data.js';
 
 // Global
 const getEleById = (id) => {
@@ -17,7 +17,48 @@ const qrSelector = (selector) => {
 // DOM
 const submitEle = getEleById(`submit-btn`);
 const healthyEl = getEleById(`healthy-btn`);
+const formEditEl = getEleById(`formEdit-modal`);
 const tableBodyEl = getEleById(`tbody`);
+const breedTypeSeclectEl = getEleById(`input-type`);
+const breedSelectEl = getEleById(`input-breed`);
+const breedSelectElEdit = getEleById(`input-breed-edit`);
+
+const renderBreeds = (type) => {
+  const page = window.location.pathname.split('/').pop();
+  if (page === 'edit.html') {
+    if (type === 'dog') {
+      breedSelectElEdit.innerHTML = ``;
+      breedList.Dog.forEach((breed) => {
+        breedSelectElEdit.appendChild(createBreedOption(breed));
+      })
+    } else if (type === 'cat') {
+      breedSelectElEdit.innerHTML = ``;
+      breedList.Cat.forEach((breed) => {
+        breedSelectElEdit.appendChild(createBreedOption(breed));
+      })
+    }
+  } else {
+    if (type === 'dog') {
+      breedSelectEl.innerHTML = ``;
+      breedList.Dog.forEach((breed) => {
+        breedSelectEl.appendChild(createBreedOption(breed));
+      })
+    } else if (type === 'cat') {
+      breedSelectEl.innerHTML = ``;
+      breedList.Cat.forEach((breed) => {
+        breedSelectEl.appendChild(createBreedOption(breed));
+      })
+    }
+  }
+
+}
+
+const createBreedOption = (breed) => {
+  const option = document.createElement('option');
+  option.value = breed;
+  option.textContent = breed;
+  return option;
+}
 
 const createTablehead = (content) => {
   const cell = document.createElement('td');
@@ -68,8 +109,19 @@ const createEditButton = (petId) => {
   editButton.type = 'button';
   editButton.className = 'btn btn-secondary';
   editButton.textContent = 'Edit';
-  editButton.onclick = () => editPet(petId);
+  editButton.onclick = () => addEditPetValue(petId);
   deleteCell.appendChild(editButton);
+  return deleteCell;
+}
+
+const createDeleteBreedButton = (breed, breedType) => {
+  const deleteCell = document.createElement('td');
+  const deleteButton = document.createElement('button');
+  deleteButton.type = 'button';
+  deleteButton.className = 'btn btn-danger';
+  deleteButton.textContent = 'Delete';
+  deleteButton.onclick = () => deleteBreed(breed, breedType);
+  deleteCell.appendChild(deleteButton);
   return deleteCell;
 }
 
@@ -99,13 +151,23 @@ const createFragmentContent = (pet) => {
   row.appendChild(createIconCell(pet.sterilized ? `check` : `x`));
   row.appendChild(createCell(pet.bmi));
   row.appendChild(createCell(pet.dateCreate));
-  if (page === 'index.html') {
+  if (page === 'index.html' || page === '') {
     row.appendChild(createDeleteButton(pet.id));
   } else if (page === 'edit.html') {
     row.appendChild(createEditButton(pet.id));
   }
   return row;
 };
+
+const createFragmentContentBreeds = (breed, index) => {
+  const row = document.createElement('tr');
+  row.appendChild(createCell(++index));
+  row.appendChild(createCell(breed.breed));
+  row.appendChild(createCell(breed.type));
+  row.appendChild(createDeleteBreedButton(breed.breed, breed.type));
+
+  return row;
+}
 
 // const renderTableData = () => {
 //     const petArr = Object.values(petList);
@@ -204,17 +266,66 @@ const renderTableDataHealthyPet = (petarr) => {
   tableBodyEl.appendChild(fragment);
 }
 
+const renderTableDataBreeds = (breedList) => {
+  tableBodyEl.innerHTML = ``;
+  const fragment = document.createDocumentFragment();
+  if (!breedList.Dog && !breedList.Cat) {
+    tableBodyEl.appendChild(fragment);
+  } else {
+    const breedArr = Object.entries(breedList).flatMap(([type, breeds]) => {
+      return breeds.map((breed) => {
+        return {
+          type: type,
+          breed: breed
+        }
+      }).sort((a, b) => {
+        return a.breed.localeCompare(b.breed);
+      });
+    });
+
+    breedArr.forEach((breed, index) => {
+      const row = createFragmentContentBreeds(breed, index);
+      fragment.appendChild(row);
+    });
+    tableBodyEl.appendChild(fragment);
+  }
+}
+
 const deletePet = (petId) => {
   if (petList.hasOwnProperty(petId)) {
     delete petList[petId];
     localStorage.setItem('petList', JSON.stringify(petList));
-    renderTableData();
+    renderTableData(petList);
   }
 }
 
-const editPet = (petId, dataEdited) => {
-  if (petList.hasOwnProperty(petId)) {
+const deleteBreed = (breed, breedType) => {
+  const breedIndex = breedList[breedType].indexOf(breed);
+  if (breedIndex !== -1) {
+    breedList[breedType].splice(breedIndex, 1)
+    localStorage.setItem('breedList', JSON.stringify(breedList));
+    renderTableDataBreeds(breedList);
+  } else {
+    window.alert(`Can't find breed: ${breed}`);
+  }
+}
 
+const addEditPetValue = (petId) => {
+  if (petList.hasOwnProperty(petId)) {
+    const pet = petList[petId];
+    getEleById('input-id-edit').value = pet.id;
+    getEleById('input-name-edit').value = pet.name;
+    getEleById('input-age-edit').value = pet.age;
+    getEleById('input-type-edit').value = pet.type.toLowerCase();
+    getEleById('input-weight-edit').value = pet.weight;
+    getEleById('input-length-edit').value = pet.length;
+    getEleById('input-breed-edit').value = pet.breed.at(0).toUpperCase() + pet.breed.slice(1);
+    getEleById('input-color-1-edit').value = pet.color;
+    getEleById('input-vaccinated-edit').checked = pet.vaccinated;
+    getEleById('input-dewormed-edit').checked = pet.dewormed;
+    getEleById('input-sterilized-edit').checked = pet.sterilized;
+    formEditEl.classList.remove('hidden');
+    document.querySelector('.overlay').classList.remove('hidden');
     // delete petList[petId];
     // localStorage.setItem('petList', JSON.stringify(petList));
     // renderTableData(petList);
@@ -230,4 +341,6 @@ export {
   getCreateDate,
   renderTableData,
   renderTableDataHealthyPet,
+  renderTableDataBreeds,
+  renderBreeds,
 };

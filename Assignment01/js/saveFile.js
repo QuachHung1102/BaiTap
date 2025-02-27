@@ -1,8 +1,10 @@
 'use strict';
 
+// export data to file
 const saveDynamicDataToFile = (data, fileName) => {
   try {
-    var blob = new Blob([data], { type: 'text/plain;charset=utf-8' });
+    const jsonData = JSON.stringify(data, null, 2);
+    var blob = new Blob([jsonData], { type: 'application/json;charset=utf-8' });
     saveAs(blob, fileName);
     console.log(`Data saved to file: ${fileName}`);
   } catch (error) {
