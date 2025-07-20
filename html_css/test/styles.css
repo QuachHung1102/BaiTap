@@ -1,0 +1,165 @@
+/* Reset và thiết lập cơ bản */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+/* Container chính */
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Tiêu đề chính */
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Các section upload */
+.upload-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  text-align: center;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.upload-section:hover {
+  border-color: #007bff;
+}
+
+/* Tiêu đề của từng section */
+.upload-section h3 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Input file */
+.file-input {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 300px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.file-input:hover {
+  border-color: #007bff;
+}
+
+/* Container preview */
+.preview-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Ảnh preview */
+.preview-image {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-top: 10px;
+}
+
+/* Nút upload (nếu cần) */
+.upload-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 10px;
+  transition: background-color 0.3s;
+}
+
+.upload-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Thông tin hướng dẫn */
+.info {
+  color: #666;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+/* Styling cho multiple preview */
+#multiplePreview {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+#multiplePreview img {
+  max-width: 150px;
+  margin: 5px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  object-fit: contain;
+}
+
+/* Drag and drop zone */
+#dropZone {
+  cursor: pointer;
+  position: relative;
+}
+
+#dropZone.dragover {
+  border-color: #007bff !important;
+  background-color: #f0f8ff !important;
+}
+
+/* Drop preview */
+#dropPreview {
+  margin-top: 15px;
+}
+
+#dropPreview p {
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  body {
+    margin: 20px auto;
+    padding: 10px;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  .upload-section {
+    padding: 15px;
+  }
+  
+  .file-input {
+    max-width: 100%;
+  }
+  
+  #multiplePreview img {
+    max-width: 120px;
+  }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ví dụ Input Nhập Ảnh</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Ví dụ Input Nhập Ảnh</h1>
+    
+    <!-- Ví dụ 1: Input file cơ bản -->
+    <div class="upload-section">
+      <h3>1. Input file cơ bản</h3>
+      <input type="file" accept="image/*" class="file-input" id="basicInput">
+      <div class="info">Chọn một file ảnh từ máy tính</div>
+    </div>
+    
+    <!-- Ví dụ 2: Input với preview -->
+    <div class="upload-section">
+      <h3>2. Input với xem trước ảnh</h3>
+      <input type="file" accept="image/*" class="file-input" id="previewInput">
+      <div class="preview-container" id="previewContainer" style="display: none;">
+        <p>Xem trước:</p>
+        <img id="previewImage" class="preview-image" alt="Preview">
+      </div>
+    </div>
+    
+    <!-- Ví dụ 3: Input multiple -->
+    <div class="upload-section">
+      <h3>3. Chọn nhiều ảnh cùng lúc</h3>
+      <input type="file" accept="image/*" multiple class="file-input" id="multipleInput">
+      <div class="info">Có thể chọn nhiều file ảnh cùng lúc</div>
+      <div id="multiplePreview"></div>
+    </div>
+    
+    <!-- Ví dụ 4: Drag and Drop -->
+    <div class="upload-section" id="dropZone">
+      <h3>4. Kéo thả ảnh</h3>
+      <p>Kéo và thả ảnh vào đây hoặc click để chọn</p>
+      <input type="file" accept="image/*" class="file-input" id="dragDropInput" style="display: none;">
+      <div id="dropPreview"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
